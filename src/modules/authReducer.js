@@ -1,5 +1,6 @@
 import { createAction, handleActions } from "redux-actions"
 import { takeLatest, call } from "redux-saga/effects"
+import produce from "immer"
 import * as authAPI from "lib/api/authAPI"
 import createRequestSaga, { createRequestActionTypes } from "modules/sagaUtils"
 
@@ -86,11 +87,10 @@ const initialState = {
 
 const authReducer = handleActions(
   {
-    [CHANGE_FIELD]: (state, { payload: { form, key, value } }) => {
-      const newSate = Object.assign({}, state)
-      newSate[form][key] = value
-      return newSate
-    },
+    [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
+      produce(state, draft => {
+        draft[form][key] = value
+      }),
     // 로그인 성공
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
@@ -98,11 +98,14 @@ const authReducer = handleActions(
       auth,
     }),
     // 로그인 실패
-    [LOGIN_FAILURE]: (state, { payload: error }) => {
-      const newSate = Object.assign({}, state)
-      newSate.authError = error
-      return newSate
-    },
+    [LOGIN_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      authError: error,
+    }),
+    [INITIALIZE_FORM]: (state, { payload: form }) => ({
+      ...state,
+      [form]: initialState[form],
+    }),
     [LOGOUT]: state => ({
       ...state,
       auth: null,

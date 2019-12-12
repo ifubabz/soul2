@@ -26,14 +26,22 @@ const initialState = {
       dueDate: "3",
       name: "Park",
       period: "weekly",
+      contents: ["코딩테스트 알고리즘 풀이", "객체지향 개념 정리"],
     },
     {
       id: "2",
-      title: "하루 6잔 물 마시기",
+      title: "하루 5잔 물 마시기",
       createDate: "2019-12-10 18:22",
       dueDate: "1",
       name: "",
       period: "daily",
+      contents: [
+        "아침에 일어나서",
+        "오전시간",
+        "오후시간",
+        "저녁시간",
+        "자기전에",
+      ],
     },
   ],
 }

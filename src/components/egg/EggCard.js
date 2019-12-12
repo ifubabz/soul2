@@ -78,12 +78,18 @@ const EggCard = ({ egg }) => {
           title="Paella dish"
         /> */}
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            코딩테스트 알고리즘 풀이
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            객체지향 개념 정리
-          </Typography>
+          {egg.contents.map((content, index) => {
+            return (
+              <Typography
+                variant="body2"
+                key={index}
+                color="textSecondary"
+                component="p"
+              >
+                {content}
+              </Typography>
+            )
+          })}
         </CardContent>
         <CardActions disableSpacing>
           <Typography variant="body2" color="textSecondary" component="p">

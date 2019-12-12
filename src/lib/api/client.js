@@ -6,9 +6,9 @@ const client = axios.create({
   },
 })
 
-client.defaults.baseURL = "/api"
+client.defaults.baseURL = "/api/v1"
 if (process.env.NODE_ENV === "development") {
-  client.defaults.baseURL = "http://localhost:9090/api"
+  client.defaults.baseURL = "http://localhost:9090/api/v1"
 }
 
 client.interceptors.request.use(config => {
